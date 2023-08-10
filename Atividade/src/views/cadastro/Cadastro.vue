@@ -65,6 +65,8 @@
   
   <style>
   .form-group {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 15px;
   }
   
