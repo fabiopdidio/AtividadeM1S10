@@ -1,17 +1,23 @@
 <template>
   <div>
     <div class="button-container">
-      <button>Home 🏠</button>
-      <button>Talentos 📂</button>
-      <button>Sobre 🗺️</button>
+      <div>Home 🏠</div>
+      <div>Talentos 📂</div>
+      <div>Sobre 🗺️</div>
     </div>
-    <h1>Banco de Talentos</h1>
+    <h1 class="title">Banco de Talentos</h1>
   </div>
 </template>
 <script>
 export default {}
 </script>
 <style>
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+}
+
 .button-container {
   display: flex;
   justify-content: space-between;

@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="button-container">
-      <button>Home 🏠</button>
-      <button>Talentos 📂</button>
-      <button>Sobre 🗺️</button>
+      <div>Home 🏠</div>
+      <div>Talentos 📂</div>
+      <div>Sobre 🗺️</div>
     </div>
 
     <div class="content">
