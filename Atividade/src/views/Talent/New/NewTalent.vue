@@ -1,10 +1,5 @@
 <template>
     <div>
-      <div class="button-container">
-        <button>Home 🏠</button>
-        <button>Talentos 📂</button>
-        <button>Sobre 🗺️</button>
-      </div>
       <h1>Cadastro de Talento</h1>
       
       <div class="form-group">
