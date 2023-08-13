@@ -26,7 +26,7 @@
 
     <label for="nivel">Nível</label>
     <select v-model="level">
-      <option value="junior">Junior</option>
+      <option value="junior">Júnior</option>
       <option value="pleno">Pleno</option>
       <option value="senior">Senior</option>
     </select>
@@ -52,7 +52,7 @@
 
     <!-- Área de texto livre -->
     <label>Carta de apresentacao</label>
-    <textarea v-model="introdution"></textarea>
+    <textarea v-model="introduction"></textarea>
 
     <!-- Botão de envio -->
     <button type="submit">Cadastrar</button>
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import * as yup from 'yup'
+import * as yup from 'yup' // Validacao de formulario
 
 export default {
   data() {
@@ -72,17 +72,17 @@ export default {
       area: '',
       level: '',
       skills: [],
-      introdution: ''
+      introduction: ''
     }
   },
   methods: {
-    handleSubmit() {
+    handleSubmit() { // Regras de validacao do formulario com yup
       try {
         console.log('entrei aqui')
         const schema = yup.object().shape({
           name: yup.string().required('O nome é obrigatório'),
           email: yup.string().email('Email não inválido').required('Email é obrigatório'),
-          area: yup.string().required('A area é obrigatorio')
+          area: yup.string().required('A área é obrigatorio')
         })
 
         schema.validateSync({
@@ -95,7 +95,7 @@ export default {
       }
     }
   },
-  watch: {
+  watch: { // Limpa o array
     area(newValue, oldValue) {
       if (newValue !== oldValue) {
         this.skills = []
@@ -110,5 +110,10 @@ export default {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
+}
+button {
+  background-color: black;
+  color: white;
+  margin-top: 8px;
 }
 </style>
