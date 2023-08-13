@@ -39,9 +39,11 @@
     </ul>
   </nav>
 </template>
+
 <script>
 export default {}
 </script>
+
 <style>
 .menu {
   display: flex;
@@ -60,6 +62,5 @@ export default {}
   justify-content: space-between;
   gap: 10px;
   width: 33%;
-
 }
 </style>

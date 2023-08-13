@@ -1,72 +1,114 @@
 <template>
-    <div>
-      <h1>Cadastro de Talento</h1>
-      
-      <div class="form-group">
-        <label for="nome">Nome completo</label>
-        <input id="nome" type="text" />
-      </div>
-      
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" type="text" />
-      </div>
-      
-      <div class="form-group">
-        <label for="date">Data de nascimento</label>
-        <input id="date" type="date" />
-      </div>
-      
-      <div class="form-group">
-        <label for="whatsapp">Whatsapp</label>
-        <input id="whatsapp" type="number" />
-      </div>
-      
-      <div class="form-group">
-        <label for="area">Área de interesse</label>
-        <select id="area">
-          <option value=""></option>
-          <option value="Front-end">Front-end</option>
-          <option value="Back-end">Back-end</option>
-          <option value="Full-stack">Full-stack</option>
-        </select>
-      </div>
-      
-      <div class="form-group">
-        <label for="level">Nível profissional</label>
-        <select id="level">
-          <option value=""></option>
-          <option value="Júnior">Júnior</option>
-          <option value="Pleno">Pleno</option>
-          <option value="Senior">Senior</option>
-        </select>
-      </div>
-      
-      <div class="checkbox">
-        <p>Suas habilidades</p>
-        <label><input type="checkbox" value="html" /> HTML</label>
-        <label><input type="checkbox" value="css" /> CSS3</label>
-        <label><input type="checkbox" value="javascript" /> Javascript</label>
-        <label><input type="checkbox" value="react" /> React</label>
-        <label><input type="checkbox" value="react-native" /> React-native</label>
-        <label><input type="checkbox" value="node" /> Node</label>
-      </div>
+  <form @submit.prevent="handleSubmit" class="new-form">
+    <!-- Cria formulário e define evento de envio -->
+    <h1>Cadastro de talento</h1>
+
+    <!-- Inputs comuns -->
+    <label for="name">Nome Completo</label>
+    <input id="name" v-model="name" />
+
+    <label for="email">Email</label>
+    <input id="email" v-model="email" />
+
+    <label for="date">Data de nascimento</label>
+    <input type="date" id="date" v-model="birthday" />
+
+    <label for="phone">Whatsapp</label>
+    <input id="phone" v-model="phone" />
+
+    <!-- Select com opções de áreas -->
+    <label for="area">Área de interesse</label>
+    <select v-model="area">
+      <option value="frontend">Frontend</option>
+      <option value="backend">Backend</option>
+      <option value="fullstack">Fullstack</option>
+    </select>
+
+    <label for="nivel">Nível</label>
+    <select v-model="level">
+      <option value="junior">Junior</option>
+      <option value="pleno">Pleno</option>
+      <option value="senior">Senior</option>
+    </select>
+
+    <p>Selecione suas habilidades</p>
+
+    {{ skills.length }}
+
+    <!-- Definição de tecnologias baseado na área de interesse selecionada -->
+    <div v-if="area === 'frontend' || area === 'fullstack'">
+      <label><input type="checkbox" v-model="skills" value="HTML" />HTML</label>
+      <label><input type="checkbox" v-model="skills" value="CSS" /> CSS</label>
+      <label><input type="checkbox" v-model="skills" value="JAVASCRIPT" /> JAVASCRIPT</label>
+      <label><input type="checkbox" v-model="skills" value="VUE" /> VUE</label>
     </div>
-  </template>
-  
-  <script>
-  export default {}
-  </script>
-  
-  <style>
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
+
+    <div v-if="area === 'backend' || area === 'fullstack'">
+      <label><input type="checkbox" v-model="skills" value="Node" />Node</label>
+      <label> <input type="checkbox" v-model="skills" value="Php" /> PHP</label>
+      <label><input type="checkbox" v-model="skills" value="Laravel" /> Laravel</label>
+      <label><input type="checkbox" v-model="skills" value="Java" /> Java</label>
+    </div>
+
+    <!-- Área de texto livre -->
+    <label>Carta de apresentacao</label>
+    <textarea v-model="introdution"></textarea>
+
+    <!-- Botão de envio -->
+    <button type="submit">Cadastrar</button>
+  </form>
+</template>
+
+<script>
+import * as yup from 'yup'
+
+export default {
+  data() {
+    return {
+      name: '',
+      email: '',
+      birthday: '',
+      phone: '',
+      area: '',
+      level: '',
+      skills: [],
+      introdution: ''
+    }
+  },
+  methods: {
+    handleSubmit() {
+      try {
+        console.log('entrei aqui')
+        const schema = yup.object().shape({
+          name: yup.string().required('O nome é obrigatório'),
+          email: yup.string().email('Email não inválido').required('Email é obrigatório'),
+          area: yup.string().required('A area é obrigatorio')
+        })
+
+        schema.validateSync({
+          name: this.name,
+          email: this.email,
+          area: this.area
+        })
+      } catch (error) {
+        alert('Error no formulario')
+      }
+    }
+  },
+  watch: {
+    area(newValue, oldValue) {
+      if (newValue !== oldValue) {
+        this.skills = []
+      }
+    }
   }
-  
-  .checkbox label {
-    margin-right: 10px;
-  }
-  </style>
-  
+}
+</script>
+
+<style scoped>
+.new-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+</style>

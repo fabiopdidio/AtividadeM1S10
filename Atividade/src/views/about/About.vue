@@ -1,11 +1,5 @@
 <template>
   <div>
-    <div class="button-container">
-      <div>Home 🏠</div>
-      <div>Talentos 📂</div>
-      <div>Sobre 🗺️</div>
-    </div>
-
     <div class="content">
       <h1>Sobre</h1>
       <p>
@@ -40,5 +34,8 @@ export default {}
   justify-content: space-between;
   padding: 10px;
   padding-top: 20px;
+}
+.content {
+  margin-top: 20px;
 }
 </style>
